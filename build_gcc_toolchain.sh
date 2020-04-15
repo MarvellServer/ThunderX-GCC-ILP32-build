@@ -1,12 +1,10 @@
 #!/bin/bash
 
-#
 # This script builds a toolchain including binutils, gcc, and glibc
 # (including ld-linux-aarch64.so.1, libc, and libm) under ${INSTALLDIR}.
 # This GCC is intended for benchmarking purposes only and may not work with
 # packages and libraries installed on an Arm system and built with a different
 # compiler.
-#
 
 # Set INSTALLDIR to an absolute pathname where you want the compiler before
 # running this script or pass in an absolute pathname as the argument to this
@@ -20,6 +18,7 @@ if [ "$DO_MULTILIB" = "TRUE" ]; then
 else
   MULTILIB_CONF=""
 fi
+
 DO_LIBMVEC=$3
 if [ "$DO_LIBMVEC" = "TRUE" ]; then
   LIBMVEC_CONF="--enable-mathvec"
@@ -47,16 +46,16 @@ GLIBC_CONF="--with-headers=${INSTALLDIR}/usr/include \
             ${LIBMVEC_CONF} --enable-obsolete-rpc \
             --prefix=/usr --host=${TARGET}"
 
-# /bin/rm -rf ${INSTALLDIR}
 
 make_dir()
 {
   DIR=$1
   if [ ! -d ${DIR} ]; then
     mkdir ${DIR}
-    echo "********SUCCESS ${DIR} ************"
+    echo "${DIR} successfully created."
   fi
 }
+
 check_error()
 {
   RET=$1
@@ -64,6 +63,9 @@ check_error()
   if [ ${RET} != 0 ]; then
     echo ${MSG}
     exit 1
+  else
+    echo "SUCCESS: ${MSG} successful"
+    exit 0
   fi
 }
 
@@ -103,7 +105,7 @@ make_binutils()
     cd obj-binutils
   fi
   make ${PARALLEL_BUILD} all && make install
-  check_error $? "ERROR: binutils build failed"
+  check_error $? "binutils build"
   cd ..
 }
 
@@ -117,18 +119,17 @@ make_init_gcc()
     cd obj-gcc-init
   fi
   make ${PARALLEL_BUILD} all-gcc all-target-libgcc && make install-gcc install-target-libgcc
-  check_error $? "ERROR: Initial gcc build failed"
+  check_error $? "Initial gcc build"
   cd ..
 }
 
-# Still needed?
 make_linux_headers()
 {
   cd linux
   export CC=/usr/bin/gcc
   make headers_install ARCH=arm64 \
     INSTALL_HDR_PATH=${INSTALLDIR}/usr HOSTCC=/usr/bin/gcc
-  check_error $? "ERROR: linux header build failed"
+  check_error $? "linux header build"
   unset CC
   cd ..
 }
@@ -151,7 +152,7 @@ make_glibc64()
     cd obj-glibc64
   fi
   make ${PARALLEL_BUILD} all && make DESTDIR=$INSTALLDIR install
-  check_error $? "ERROR: glibc64 build failed"
+  check_error $? "glibc64 build"
 
   cd ..
   unset BUILD_CC CC CXX AR RANLIB AS LD
@@ -175,7 +176,7 @@ make_glibc32()
     cd obj-glibc32
   fi
   make ${PARALLEL_BUILD} all && make DESTDIR=$INSTALLDIR install
-  check_error $? "ERROR: glibc32 build failed"
+  check_error $? "glibc32 build"
 
   cd ..
   unset BUILD_CC CC CXX AR RANLIB AS LD
@@ -191,15 +192,15 @@ make_gcc()
     cd obj-gcc
   fi
   make ${PARALLEL_BUILD} all && make install
-  check_error $? "ERROR: gcc build failed"
+  check_error $? "gcc build"
   cd ..
 }
 
 export PATH=${INSTALLDIR}/bin:${INSTALLDIR}/usr/bin:${PATH}
-
 if [ "${INSTALLDIR}" = "SETME" ]; then
   check_error 1 "Set INSTALLDIR to where you want the compiler."
 fi
+
 make_dir ${INSTALLDIR}
 make_dir ${INSTALLDIR}/lib
 make_dir ${INSTALLDIR}/lib64

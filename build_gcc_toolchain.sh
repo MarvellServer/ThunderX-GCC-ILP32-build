@@ -89,7 +89,7 @@ get_sources()
 
   # Get the ILP32 supported linux kernel sources
   if [ ! -d linux ]; then
-    git clone https://github.com/MarvellServer/ThunderX-ilp32-linux.git -b ilp32-5.4.y linux
+    git clone https://github.com/MarvellServer/ThunderX-TXOS.git -b next linux
   fi
 }
 

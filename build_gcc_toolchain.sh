@@ -65,8 +65,16 @@ check_error()
     exit 1
   else
     echo "SUCCESS: ${MSG} successful"
-    exit 0
   fi
+}
+
+make_tar()
+{
+   # Create tar.bz2 for the installdir
+   if [ -d ${INSTALLDIR} ]; then
+     tar -cvzf toolchain-tot-ilp32.tar.bz2 ${INSTALLDIR}
+     echo "Successfully created tar file from ${INSTALLDIR}"
+  fi   
 }
 
 get_sources()
@@ -196,6 +204,7 @@ make_gcc()
   cd ..
 }
 
+
 export PATH=${INSTALLDIR}/bin:${INSTALLDIR}/usr/bin:${PATH}
 if [ "${INSTALLDIR}" = "SETME" ]; then
   check_error 1 "Set INSTALLDIR to where you want the compiler."
@@ -219,4 +228,4 @@ if [ "$DO_MULTILIB" = "TRUE" ]; then
   make_glibc32
 fi
 make_gcc
-
+make_tar

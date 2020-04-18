@@ -121,6 +121,34 @@ Download alien from site currently the best place to download the tarball is fro
 
   $ sudo rpm -e toolchain-tot-ilp32-1-2.aarch64
  
+# RPM Build/Install/Uninstall using SPEC file
+
+## How to build the RPM using SPEC file
+
+  You have to execute the SPEC file as below
+
+  ThunderX-GCC-ILP32-build]$ rpmbuild --target aarch64 -bb toolchain_tot_ilp32.spec
+
+  The RPM is built and deployed under your home directory rpmbuild/RPMS/aarch64/
+
+  ThunderX-GCC-ILP32-build]$ ls ~/rpmbuild/RPMS/aarch64/
+
+  toolchain-tot-ilp32-1.0-2.el8.aarch64.rpm
+
+## Install the RPM package
+
+  You can install the RPM using the command from the location rpmbuild/RPMS/aarch64
+ 
+  ThunderX-GCC-ILP32-build]$ sudo rpm -ivh ~/rpmbuild/RPMS/aarch64/toolchain-tot-ilp32-1.0-2.el8.aarch64.rpm  --nodeps
+
+  This will install the toolchain under /opt/toolchain-tot-ilp32 path
+
+## Uninstall the RPM package
+
+  The un-installation can be done using -e switch option
+
+  ThunderX-GCC-ILP32-build]$ sudo rpm -e toolchain-tot-ilp32-1.0-2.el8.aarch64
+
 
 # Reference:
 

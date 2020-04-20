@@ -8,7 +8,7 @@ Source0:        http://socrates/Server%20Toolchain/gcc/%{name}.tar.bz2
 BuildArch:      aarch64
 BuildRequires:  libgcc, ncurses, python3, ncurses-libs
 Requires:       libgcc, ncurses, python3, ncurses-libs
-#AutoReq:	no
+AutoReq:	no
 
 %description
 A RPM that contains all the necessary ilp32 packages.

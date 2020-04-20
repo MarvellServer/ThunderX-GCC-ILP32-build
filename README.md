@@ -26,7 +26,7 @@ You can also download, compile and install texinfo - http://ftp.gnu.org/gnu/texi
 
 ./configure --prefix=/usr/local
 
-make -j224
+make -j$(nporc)
 
 make install
 
@@ -81,7 +81,7 @@ Download alien from site currently the best place to download the tarball is fro
   
   $ perl Makefile.PL
 
-  $ make
+  $ make -j$(nporc)
 
   $ sudo make install
 
@@ -139,7 +139,7 @@ Download alien from site currently the best place to download the tarball is fro
 
   You can install the RPM using the command from the location rpmbuild/RPMS/aarch64
  
-  ThunderX-GCC-ILP32-build]$ sudo rpm -ivh ~/rpmbuild/RPMS/aarch64/toolchain-tot-ilp32-1.0-2.el8.aarch64.rpm  --nodeps
+  ThunderX-GCC-ILP32-build]$ sudo rpm -ivh ~/rpmbuild/RPMS/aarch64/toolchain-tot-ilp32-1.0-2.el8.aarch64.rpm
 
   This will install the toolchain under /opt/toolchain-tot-ilp32 path
 

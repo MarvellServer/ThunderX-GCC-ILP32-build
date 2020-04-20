@@ -28,7 +28,7 @@ fi
 
 # INSTALLDIR=SETME
 
-PARALLEL_BUILD=-j40
+PARALLEL_BUILD=-j$(nproc)
 TARGET=aarch64-linux-gnu
 CONF="--prefix=${INSTALLDIR} --with-sysroot=${INSTALLDIR} \
   --target=$TARGET --host=$TARGET --build=$TARGET"

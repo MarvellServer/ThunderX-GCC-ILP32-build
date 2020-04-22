@@ -1,8 +1,12 @@
 # ThunderX-GCC-ILP32-build
 
-The script will build the toolchain with ILP32 support. You need to install all the toolchain build essential tools for your OS distribution.
+The script will build the toolchain with ILP32 support. You need to install all the toolchain build essential tools for your OS distribution. We are assuming you have installed the TXOS (ThunderX OS) latest available version on ThunderX2 or later version of the hardware and installed all the dependency packages.  We support the build procedure only on the latest available TXOS.
 
-e.g: The following is an example distribution version.
+### Operating System: ThunderX OS (TXOS) version txos-20.03 or later
+
+### Hardware        : ThunderX2 or later version.
+
+You can try on other OS, but we won't support. e.g. CentOS/Debian/Ubuntu ..etc.  But you may need to install the dependency packages.
 
 # Debian/Ubuntu:
 
@@ -26,7 +30,7 @@ You can also download, compile and install texinfo - http://ftp.gnu.org/gnu/texi
 
 ./configure --prefix=/usr/local
 
-make -j$(nporc)
+make -j$(nproc)
 
 make install
 
@@ -53,7 +57,7 @@ $ sudo chown YourUsername:YourUsername /opt/toolchain-tot-ilp32
 
 NOTE: Avoid to run the script as a root, because it may cause your host machine rootfs unless you know exactly what you are doing
 
-$ ./build_github_gcc_toolchain.sh /opt/toolchain-tot-ilp32 TRUE TRUE
+$ ./build_gcc_toolchain.sh /opt/toolchain-tot-ilp32 TRUE TRUE
 
 toolchain-tot-ilp32 - INSTALLDIR of the built toolchain.
 
@@ -81,7 +85,7 @@ Download alien from site currently the best place to download the tarball is fro
   
   $ perl Makefile.PL
 
-  $ make -j$(nporc)
+  $ make -j$(nproc)
 
   $ sudo make install
 

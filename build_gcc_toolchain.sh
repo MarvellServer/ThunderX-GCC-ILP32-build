@@ -81,7 +81,7 @@ get_sources()
 {
   # Get the GCC sources
   if [ ! -d gcc ]; then
-     git clone https://github.com/MarvellServer/ThunderX-Toolchain-gcc-ilp32.git gcc
+     git clone git@github.com:MarvellServer/ThunderX-Toolchain-gcc-ilp32.git gcc
      cd gcc
      ./contrib/download_prerequisites
      cd ..

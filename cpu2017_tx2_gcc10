@@ -1,6 +1,26 @@
 # Usage: runcpu --config cpu2017_tx2_gcc10 ...
-#
-# specmake variables used herein [and set on the command line with --define]
+
+# This file is based on the following assumptions:
+#   TX2 is the machine being run on, hence the file name
+#   GCC 10 is the compiler, hence the file name, but the assumption of the
+#    version isn't that strong
+#   Jemalloc (a malloc replacement) is being used. This assumption effects
+#     the "label", and the flags used for linking. It is assumed that the
+#     the build of jemalloc is placed in the "gcc_dir". If using the default
+#     GCC, then linker flags need to be changed in this file.
+#   ILP32 is the default ABI
+#   32 cores per socket
+#   System description starting at "Tester and System Descriptions" should
+#     should be edited to match the setup. (TO DO: Enhance sysinfo, write
+#     scripts to capture (most of) this information automatically)
+#   There are other variables that need setting. For example, flagsurl000
+#     and flagsurl001 should point to the compiler flags description
+#     file(s)
+# See below for the specific specmake variables that represent these
+# assumptions and other defaults.
+
+# Some specmake variables used herein [and settable on the command line with
+#    --define]
 # gcc_dir - path to build from struct_reorg branch on github
 # bits - 64 => LP64 ABI, 32 => ILP32 ABI
 # sockets - number of sockets to run on, used for NUMA control
@@ -9,15 +29,20 @@
 # monitor_socmon - run socmon during run
 # monitor_perf - run perf during run
 # monitor_events - events to monitor using perf
-#
+
 # Example invocation:
-# runcpu --output_root ??? --loose --iterations 3 --tune ??both?? --size ref \
-#. --noreportable --nopower --runmode rate --tune ??both?? --size refrate \
-#. intrate
-#
-# Set defaults
+#  runcpu --output_root ??? --loose --iterations 3 --tune ??both?? --size ref \
+#    --noreportable --nopower --runmode rate --tune ??both?? --size refrate \
+#    intrate
+
+# The following specmake variables have the following defaults:
+# --define bits=32
+# --define build_ncpus=64
 # --define sockets=2
+# --define single_core=0
 # --define smt=4
+# --define monitor_socmon=0
+# --define monitor_perf=0
 ############################################################################
 #------------------------------------------------------------------------------
 # SPEC CPU2017 config file for: gcc / g++ / gfortran on Linux ARM systems
@@ -216,8 +241,6 @@ fpspeed:
 	threads	= %{Use2PerCore}
 
 #------- Compilers ------------------------------------------------------------
-default:
-%define gcc_dir /opt/gcc10-prashanth-build
 
 %ifndef %{gcc_dir}
 %   define  gcc_dir  /usr
@@ -344,7 +367,7 @@ fpspeed:
 
 #-fprefetch-loop-arrays --param prefetch-dynamic-strides=1
 
-# Move --param to fortran, so in int, only applies to exchange, leaving 
+# Move --param to fortran, so in int, only applies to exchange, leaving
 #  -fomit-frame-pointer
 %define opt_common -Ofast -mcpu=native -flto=32 -fomit-frame-pointer #--param ipa-cp-eval-threshold=1 --param ipa-cp-unit-growth=80 %{SGF}
 %define opt_model %{model} %{rpath} %{dlinker} %{libpath} %{sysroot}

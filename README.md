@@ -1,3 +1,6 @@
+This repository contains two distinct things: scripts for building a toolchain with
+ILP32 support and Benchmark configurations; just SPECCPU2017 for the moment.
+
 # ThunderX-GCC-ILP32-build
 
 The script will build the toolchain with ILP32 support. You need to install all the toolchain build essential tools for your OS distribution. We are assuming you have installed the TXOS (ThunderX OS) latest available version on ThunderX2 or later version of the hardware and installed all the dependency packages.  We support the build procedure only on the latest available TXOS.

@@ -242,6 +242,7 @@ fpspeed:
 
 #------- Compilers ------------------------------------------------------------
 
+default:
 %ifndef %{gcc_dir}
 %   define  gcc_dir  /usr
 %endif

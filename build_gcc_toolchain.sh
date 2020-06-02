@@ -81,15 +81,16 @@ get_sources()
 {
   # Get the GCC sources
   if [ ! -d gcc ]; then
-     git clone https://github.com/MarvellServer/ThunderX-Toolchain-gcc-ilp32.git gcc
-     cd gcc
+     #git clone https://github.com/MarvellServer/ThunderX-Toolchain-gcc-ilp32.git gcc
+     git clone https://github.com/MarvellServer/ThunderX-Toolchain-gcc-ilp32.git -b gcc-10.1 gcc
+  cd gcc
      ./contrib/download_prerequisites
      cd ..
   fi
 
   # Get the Binutils-gdb sources
   if [ ! -d binutils-gdb ]; then
-    git clone http://sourceware.org/git/binutils-gdb.git binutils-gdb
+    git clone https://sourceware.org/git/binutils-gdb.git binutils-gdb
   fi
 
   # Get the GLIBC sources

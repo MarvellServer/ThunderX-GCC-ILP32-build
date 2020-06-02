@@ -72,7 +72,7 @@ make_tar()
 {
    # Create tar.bz2 for the installdir
    if [ -d ${INSTALLDIR} ]; then
-     tar -cvzf toolchain-tot-ilp32.tar.bz2 ${INSTALLDIR}
+     tar -cvzf toolchain-tot-ilp32-mcf.tar.bz2 ${INSTALLDIR}
      echo "Successfully created tar file from ${INSTALLDIR}"
   fi   
 }
@@ -81,7 +81,7 @@ get_sources()
 {
   # Get the GCC sources
   if [ ! -d gcc ]; then
-     git clone https://github.com/MarvellServer/ThunderX-Toolchain-gcc-ilp32.git gcc
+     git clone https://github.com/MarvellServer/ThunderX-Toolchain-gcc-ilp32.git -b struct_opt gcc
      cd gcc
      ./contrib/download_prerequisites
      cd ..

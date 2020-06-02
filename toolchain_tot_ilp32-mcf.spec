@@ -1,4 +1,4 @@
-Name:           toolchain-tot-ilp32
+Name:           toolchain-tot-ilp32-mcf
 Version:        1.0
 Release:        2%{?dist}
 Summary:        ilp32 toolchain
@@ -17,7 +17,7 @@ A RPM that contains all the necessary ilp32 packages.
 #%setup -q -c
 #mkdir -p $RPM_SOURCE_DIR/%{name}
 cd -
-cp toolchain-tot-ilp32.tar.bz2 $RPM_SOURCE_DIR/
+cp toolchain-tot-ilp32-mcf.tar.bz2 $RPM_SOURCE_DIR/
 cd -
 tar -xvf $RPM_SOURCE_DIR/%{name}.tar.bz2 -C $RPM_SOURCE_DIR/
 

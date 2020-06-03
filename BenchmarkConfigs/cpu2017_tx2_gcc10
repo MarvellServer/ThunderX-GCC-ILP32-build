@@ -378,7 +378,7 @@ intrate,intspeed=base:         # flags for int base
    OPTIMIZE         =   %{opt_common} %{opt_model}
    EXTRA_CXXLIBS = -ljemalloc
    EXTRA_COPTIMIZE = -fgnu89-inline -fno-strict-aliasing -fno-unsafe-math-optimizations -fno-finite-math-only -fcommon
-   FOPTIMIZE        = -Ofast -mcpu=native -flto=32 -fno-inline -mno-pc-relative-literal-loads -fomit-frame-pointer --param ipa-cp-eval-threshold=1 -fno-inline-functions-called-once --param inline-heuristics-hint-percent=1600 -fno-inline-functions-called-once
+   FOPTIMIZE        = -Ofast -mcpu=native -flto=32 -mno-pc-relative-literal-loads -fomit-frame-pointer --param ipa-cp-eval-threshold=1 -fno-inline-functions-called-once --param inline-heuristics-hint-percent=1600 -fno-inline-functions-called-once
 
 fprate,fpspeed=base:         # flags for fp base
    OPTIMIZE         = -Ofast -mcpu=native -fomit-frame-pointer
@@ -432,7 +432,7 @@ intrate,intspeed=peak: # flags for integer peak
 548.exchange2_r=peak:
 	feedback    = no
 	OPTIMIZE    = %{opt_common} %{opt_lp64}
-   	EXTRA_FOPTIMIZE= -mno-pc-relative-literal-loads -fno-inline
+        EXTRA_FOPTIMIZE= -mno-pc-relative-literal-loads
 
 
 

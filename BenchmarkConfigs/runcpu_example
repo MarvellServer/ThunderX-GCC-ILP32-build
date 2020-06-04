@@ -1,0 +1,30 @@
+# Below is an example of how to invoke runcpu. See cpu2017_tx2_gcc10
+# for more explanation of the "--define" arguments that are used for
+# controlling behavior defined in the config file. For the other
+# arguments see the details at https://www.spec.org/cpu2017/Docs/makevars.html
+# After the runcpu command are descriptions for the ones used.
+
+runcpu --rebuild --define smt=4 --define gcc_dir=/opt/gcc-tot-ilp32-tmp \
+  --iterations 1 --noreportable --configfile cpu2017_tx2_gcc10_pass4.cfg \
+  --define bits=32 --define sockets=2 --tune all --nopower \
+  --runmode rate --tune base:peak --size refrate intrate
+
+#
+--rebuild -- delete existing binaries and rebuild
+--iterations 1 -- how many times to run each benchmark
+--noreportable -- don't as much as possible, check/enforce SPECCPU2017 run rules
+--configfile cpu2017_tx2_gcc10_pass4.cfg -- configure using named file in config
+--tune all -- select tuning to use: base, peak, or all
+--nopower -- enable/disable optional power measurement
+--runmode rate -- sets mode to rate or speed NB: not documented
+--size -- should be test, train, or ref. Default is ref.
+refrate intrate -- workloads/benchmarks to run.
+  refrate => run reference, intrate => run int base and peak
+
+# Note: the example runcpu was extracted from the generated config file
+# http://sm2650-2s-01.caveonetworks.com/dbresults/Pipeline_DB_speccpu2017_physical/605/results/CPU2017.001.intrate.refrate.cfg
+# It appears there may some discrepancy between what is documented and what 
+# is accepted and/or generated. Examples:
+# --configfile appears in the doc as --config
+# --runmode not documented
+# --size requires test, train, or ref

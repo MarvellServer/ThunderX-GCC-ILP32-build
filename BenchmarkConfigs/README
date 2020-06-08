@@ -1,0 +1,16 @@
+Policies for maintaining benchmark configurations.
+
+The "main" branch should contain the "best" configuration so far for the
+benchmark that is being run. For example, because SPECCPU2017 can
+contain configurations for different ways of running, a single file
+per processor and compiler can suffice.
+
+When experimenting with configurations that one wants to share/and or
+preserve, create a branch with a descriptive name and make a new version
+of the "golden" configuration file there.
+
+When an improvement to the "golden" file is made, include in the commit
+comment the new performance numbers.
+
+For SPECCPU2017 "golden" file will/should be: cpu2017_tx2_gcc10 and it is
+used in combination with gcc-arm.xml. 

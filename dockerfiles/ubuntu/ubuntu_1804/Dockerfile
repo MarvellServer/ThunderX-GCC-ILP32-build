@@ -191,7 +191,7 @@ RUN mv /opt/ilp32 /opt/ilp32_build && \
 
 #a quick simple test of gcc after installation
 RUN cd /tmp && \
-    echo "#include <stdio.h>  \n int main() { printf(\"hello world\\n\"); return 0;} " > hello.c
+   echo "#include <stdio.h>  \\n int main() { printf(\"hello world\"); return 0;} " > hello.c
 
 RUN cd /tmp && \
     gcc hello.c -o hello.out && \

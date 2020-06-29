@@ -92,6 +92,7 @@ RUN cd /root &&\
     mkdir -p .ssh
 COPY data/id_rsa /root/.ssh
 COPY data/config /root/.ssh
+RUN chmod 600 /root/.ssh/config
 RUN eval `ssh-agent -s` && \
     ssh-add /root/.ssh/id_rsa && \
     ssh-add -l

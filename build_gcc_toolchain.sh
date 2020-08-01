@@ -122,6 +122,12 @@ make_init_gcc()
   if [ ! -d obj-gcc-init ]; then
     mkdir obj-gcc-init
     cd obj-gcc-init
+    cd ../gcc
+    git rev-parse HEAD > gcc/REVISION
+    echo "Marvell" > gcc/gcc/DEV-PHASE
+    BASEVER=`cat gcc/BASE-VER`
+    cd -
+    export LDFLAGS="-L${INSTALLDIR}/lib/gcc/aarch64-linux-gnu/${BASEVER} -lgcc"
     ../gcc/configure ${GCC_CONF} ${INIT_GCC_CONF}
   else
     cd obj-gcc-init
@@ -195,6 +201,12 @@ make_gcc()
   if [ ! -d obj-gcc ]; then
     mkdir obj-gcc
     cd obj-gcc
+    cd ../gcc
+    git rev-parse HEAD > gcc/REVISION
+    echo "Marvell" > gcc/gcc/DEV-PHASE
+    BASEVER=`cat gcc/BASE-VER`
+    cd -
+    export LDFLAGS="-L${INSTALLDIR}/lib/gcc/aarch64-linux-gnu/${BASEVER} -lgcc"
     ../gcc/configure ${GCC_CONF} ${FINAL_GCC_CONF}
   else
     cd obj-gcc
